@@ -2,6 +2,13 @@
 #include "token.h"
 #include <ctype.h>
 
+void PrsLine(AsmBlock *this)
+{
+	printf("%s\t", this->strm.tk);
+
+	TokStrmNext(&this->strm);
+}
+
 void PrsFile(AsmBlock *this)
 {
 	this->offs = 0;
@@ -9,16 +16,7 @@ void PrsFile(AsmBlock *this)
 	TokStrmNext(&this->strm);
 	while (*this->strm.tk)
 	{
-		puts(this->strm.tk);
-
-		// test
-		if (isdigit(*this->strm.tk))
-		{
-			int64_t v = PrsLit(this);
-			printf("'%lld'\n", v);
-		}
-
-		TokStrmNext(&this->strm);
+		PrsLine(this);
 	}
 }
 
