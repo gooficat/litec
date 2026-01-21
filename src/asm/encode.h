@@ -2,15 +2,36 @@
 
 #include <stdint.h>
 
-typedef enum : uint8_t
-{
-	ASM_REG_BYTE,
-	ASM_REG_WORD,
-	ASM_REG_DWOR,
-	ASM_REG_QWOR,
-} AsmRegType;
+#include "spec.h"
+
 typedef struct
 {
-	const char *name;
+	AsmReg *base;
+	AsmReg *index;
+	uint8_t scale;
+	int8_t disp;
+} AsmMemArg;
 
-} AsmReg;
+typedef enum : uint8_t
+{
+	ASM_ARG_NON,
+	ASM_ARG_REG,
+	ASM_ARG_IMM,
+	ASM_ARG_MEM,
+} AsmArgType;
+
+typedef struct
+{
+	AsmArgType type;
+	union {
+		AsmReg *reg;
+		int64_t imm;
+		AsmMemArg mem;
+	};
+} AsmArg;
+
+typedef struct
+{
+	char mnem[MNEM_MAX];
+	AsmArg args[ASM_ARG_MAX];
+} AsmIns;

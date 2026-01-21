@@ -3,7 +3,7 @@
 int main()
 {
 	TokStrm t;
-	TokStrmInit(&t, "../../tests/test.c");
+	TokStrmInit(&t, "../../tests/test.lc");
 
 	TokStrmNext(&t);
 	while (t.tk[0])
