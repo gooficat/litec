@@ -20,24 +20,24 @@ void TokStrmNext(TokStrm *this)
 		this->C = fgetc(this->f);
 	}
 
+	uint8_t i = 0;
 	if (this->C != EOF)
 	{
 		if (isalnum(this->C))
 		{
-			uint8_t i = 0;
 			do
 			{
 				this->tk[i++] = this->C;
 				this->C = fgetc(this->f);
 			} while (isalnum(this->C));
-			this->tk[i] = 0;
 		}
 		else
 		{
-			this->tk[0] = this->C;
+			this->tk[i++] = this->C;
 			this->C = fgetc(this->f);
 		}
 	}
+	this->tk[i] = 0;
 }
 bool TokStrmEol(TokStrm *this)
 {
