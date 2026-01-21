@@ -8,8 +8,8 @@ void PrsFile(AsmBlock *this)
 	TokStrmNext(&this->strm);
 	while (*this->strm.tk)
 	{
-		TokStrmNext(&this->strm);
 		puts(this->strm.tk);
+		TokStrmNext(&this->strm);
 	}
 }
 
@@ -18,4 +18,8 @@ void Assemble(const char *in_path)
 	AsmBlock block;
 
 	TokStrmInit(&block.strm, in_path);
+
+	block.pass = ASM_PASS_LABL;
+
+	PrsFile(&block);
 }
