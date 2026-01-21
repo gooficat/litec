@@ -1,5 +1,6 @@
 #include "parse.h"
 #include "token.h"
+#include <ctype.h>
 
 void PrsFile(AsmBlock *this)
 {
@@ -9,6 +10,14 @@ void PrsFile(AsmBlock *this)
 	while (*this->strm.tk)
 	{
 		puts(this->strm.tk);
+
+		// test
+		if (isdigit(*this->strm.tk))
+		{
+			int64_t v = PrsLit(this);
+			printf("'%lld'\n", v);
+		}
+
 		TokStrmNext(&this->strm);
 	}
 }

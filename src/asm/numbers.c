@@ -70,14 +70,13 @@ int64_t CharMath(const int64_t left, const char s, const int64_t right)
 
 int64_t PrsLit(AsmBlock *this)
 {
-	int64_t base = PrsLit(this);
+	int64_t base = PrsInt(this);
 
-	while (IsOprt(*this->strm.tk))
+	while (*this->strm.tk && IsOprt(*this->strm.tk))
 	{
 		char op = *this->strm.tk;
 		TokStrmNext(&this->strm);
 		base = CharMath(base, op, PrsInt(this));
-		TokStrmNext(&this->strm);
 	}
 	return base;
 }
