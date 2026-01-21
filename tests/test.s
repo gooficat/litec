@@ -2,5 +2,5 @@
 .text
 
 main:
-    movq $32 + 32, %rax
+    movq $32 + (32*2/~32), %rax
     ret

@@ -24,12 +24,13 @@ bool IsOprt(const char s)
 int64_t PrsInt(AsmBlock *this)
 {
 	int64_t n;
-	if (this->strm.tk[0] == '(')
+	if (*this->strm.tk == '(')
 	{
 		TokStrmNext(&this->strm);
 		n = PrsLit(this);
+		TokStrmNext(&this->strm);
 	}
-	else if (this->strm.tk[0] == '~')
+	else if (*this->strm.tk == '~')
 	{
 		TokStrmNext(&this->strm);
 		n = ~PrsInt(this);
