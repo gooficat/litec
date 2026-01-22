@@ -13,7 +13,10 @@ void HandleDirec(AsmBlock *this)
 	{
 		if (!strcmp(this->strm.tk, directives[i].mnem))
 		{
-			//
+			TokStrmNext(&this->strm);
+
+			directives[i].fn(this, directives[i].m);
+			break;
 		}
 	}
 }
@@ -41,13 +44,14 @@ void PrsFile(AsmBlock *this)
 	}
 }
 
-void Assemble(const char *in_path)
+void Assemble(const char *in_path, const char *out_path)
 {
 	AsmBlock block;
 
 	TokStrmInit(&block.strm, in_path);
+	fopen_s(&block.out, out_path, "wb");
 
-	block.pass = ASM_PASS_LABL;
+	block.pass = ASM_PASS_WRIT;
 
 	PrsFile(&block);
 }

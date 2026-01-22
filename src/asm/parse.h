@@ -19,7 +19,7 @@ typedef struct
 	AsmPass pass;
 } AsmBlock;
 
-void Assemble(const char *in_path);
+void Assemble(const char *in_path, const char *out_path);
 
 int64_t PrsLit(AsmBlock *this);
 
