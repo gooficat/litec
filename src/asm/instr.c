@@ -138,10 +138,12 @@ void HandleIns(AsmBlock *this)
 			printf("Immediate arg [%lli]\n", ins.args[i].imm);
 			break;
 		case ASM_ARG_MEM:
-			printf("Memory arg [b:%hhu, i:%hhu, s:%hhu, d:%lli]", //
+			printf("Memory arg [b:%hhu, i:%hhu, s:%hhu, d:%lli]\n", //
 				ins.args[i].mem.base ? ins.args[i].mem.base->code : -1,
 				ins.args[i].mem.index ? ins.args[i].mem.index->code : -1, //
 				ins.args[i].mem.scale, ins.args[i].mem.disp);
+		case ASM_ARG_NON:
+			break; // this should never happen
 		}
 	}
 }

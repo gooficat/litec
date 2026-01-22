@@ -36,3 +36,10 @@ typedef struct
 	AsmArg args[ASM_ARG_MAX];
 	uint8_t n_args;
 } AsmIns;
+
+const AsmMnem *FindMnem(const char *name);
+const AsmOpc *FindOpc(const AsmMnem *mnem, const AsmIns *ins);
+
+void EncodeIns(const AsmIns *ins);
+
+bool OpcMatchProf(const AsmOpc *opc, const AsmIns *ins);

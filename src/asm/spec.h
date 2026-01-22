@@ -23,6 +23,7 @@ typedef struct
 
 typedef enum : uint8_t
 {
+	ASM_PRM_NON,
 	ASM_PRM_DIR,		   // direct address, no modrm
 	ASM_PRM_RM_GEN_OR_MEM, // rm field general reg or memory
 	ASM_PRM_GREG,		   // general register
