@@ -50,6 +50,7 @@ AsmMemArg PrsMemArg(AsmBlock *this)
 			{
 				TokStrmNext(&this->strm);
 				out.index = FindReg(this);
+				TokStrmNext(&this->strm);
 			}
 			else
 			{
@@ -84,14 +85,14 @@ AsmIns PrsIns(AsmBlock *this)
 		{
 			AsmArg arg;
 
-			if (this->strm.C == '%')
+			if (*this->strm.tk == '%')
 			{
 				arg.type = ASM_ARG_REG;
 				TokStrmNext(&this->strm);
 				arg.reg = FindReg(this);
 				TokStrmNext(&this->strm);
 			}
-			else if (this->strm.C == '$')
+			else if (*this->strm.tk == '$')
 			{
 				arg.type = ASM_ARG_IMM;
 				TokStrmNext(&this->strm);
@@ -126,4 +127,21 @@ void HandleIns(AsmBlock *this)
 {
 	AsmIns ins = PrsIns(this);
 	printf("\n%s %hhu\n", ins.mnem, ins.n_args);
+	for (int i = 0; i != ins.n_args; ++i)
+	{
+		switch (ins.args[i].type)
+		{
+		case ASM_ARG_REG:
+			printf("Reg arg [%hhu]\n", ins.args[i].reg->code);
+			break;
+		case ASM_ARG_IMM:
+			printf("Immediate arg [%lli]\n", ins.args[i].imm);
+			break;
+		case ASM_ARG_MEM:
+			printf("Memory arg [b:%hhu, i:%hhu, s:%hhu, d:%lli]", //
+				ins.args[i].mem.base ? ins.args[i].mem.base->code : -1,
+				ins.args[i].mem.index ? ins.args[i].mem.index->code : -1, //
+				ins.args[i].mem.scale, ins.args[i].mem.disp);
+		}
+	}
 }

@@ -73,8 +73,11 @@ void PrsLine(AsmBlock *this)
 	}
 	else if (isalpha(*this->strm.tk))
 	{
-		printf("%s\t", this->strm.tk);
 		HandleIns(this);
+	}
+	else
+	{
+		// printf("%s\n", this->strm.tk);
 	}
 }
 

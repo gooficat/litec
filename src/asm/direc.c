@@ -22,6 +22,7 @@ void PutAscii(AsmBlock *this, int8_t m)
 		this->strm.C = fgetc(this->strm.f);
 	}
 	this->strm.C = fgetc(this->strm.f);
+	TokStrmNext(&this->strm);
 	if (m)
 	{
 		++this->offs;

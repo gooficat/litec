@@ -3,4 +3,4 @@
 .byte 0x0A
 
 main:
-    add %ax, %cx
+    add %ax, 32(%ax)

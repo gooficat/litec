@@ -9,7 +9,7 @@ typedef struct
 	const AsmReg *base;
 	const AsmReg *index;
 	uint8_t scale;
-	int8_t disp;
+	int64_t disp;
 } AsmMemArg;
 
 typedef enum : uint8_t

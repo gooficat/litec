@@ -43,6 +43,7 @@ bool TokStrmEol(TokStrm *this)
 {
 	while (isspace(this->C))
 	{
+		this->C = fgetc(this->f);
 		if (this->C == '\n')
 		{
 			return true;
