@@ -24,3 +24,5 @@ void Assemble(const char *in_path);
 int64_t PrsLit(AsmBlock *this);
 
 void PrsFile(AsmBlock *this);
+
+void PutBytes(AsmBlock *this, const void *data, size_t n);

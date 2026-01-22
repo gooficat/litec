@@ -1,22 +1,31 @@
 #include "direc.h"
+#include "asm/parse.h"
 #include "parse.h"
 #include "token.h"
 
-void PutBytes(AsmBlock *this, int8_t m)
+void DirPutBytes(AsmBlock *this, int8_t m)
 {
-	TokStrmNext(&this->strm);
+	int64_t v = PrsLit(this);
+	PutBytes(this, &v, m);
 }
 
 void PutAscii(AsmBlock *this, int8_t m)
 {
-	//
+	while (this->strm.C != '"')
+	{
+		++this->offs;
+		if (this->pass == ASM_PASS_WRIT)
+		{
+			fputc(this->strm.C, this->out);
+		}
+	}
 }
 
 const AsmDirec directives[] = {
-	{"byte", PutBytes, 1},
-	{"word", PutBytes, 2},
-	{"dword", PutBytes, 4},
-	{"qword", PutBytes, 8},
+	{"byte", DirPutBytes, 1},
+	{"word", DirPutBytes, 2},
+	{"dword", DirPutBytes, 4},
+	{"qword", DirPutBytes, 8},
 	{"ascii", PutAscii, 0},
 	{"asciz", PutAscii, 1},
 };

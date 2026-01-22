@@ -30,3 +30,12 @@ void Assemble(const char *in_path)
 
 	PrsFile(&block);
 }
+
+void PutBytes(AsmBlock *this, const void *data, size_t n)
+{
+	this->offs += n;
+	if (this->pass == ASM_PASS_WRIT)
+	{
+		fwrite(data, 1, n, this->out);
+	}
+}
