@@ -1,6 +1,8 @@
 #pragma once
 
 #include "token.h"
+#include "vec.h"
+#include <stddef.h>
 #include <stdint.h>
 
 typedef enum : uint8_t
@@ -13,10 +15,18 @@ typedef enum : uint8_t
 
 typedef struct
 {
+	char *name;
+	uint64_t offs;
+} AsmLabl;
+
+typedef struct
+{
 	TokStrm strm;
 	FILE *out;
 	uint64_t offs;
 	AsmPass pass;
+	AsmPass next_pass;
+	struct VecStruc(AsmLabl, size_t) labels;
 } AsmBlock;
 
 void Assemble(const char *in_path, const char *out_path);
@@ -26,3 +36,7 @@ int64_t PrsLit(AsmBlock *this);
 void PrsFile(AsmBlock *this);
 
 void PutBytes(AsmBlock *this, const void *data, size_t n);
+
+void AddLabl(AsmBlock *this, const uint64_t offs);
+
+AsmLabl *FindLabl(AsmBlock *this);

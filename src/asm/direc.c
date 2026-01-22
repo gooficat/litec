@@ -11,6 +11,7 @@ void DirPutBytes(AsmBlock *this, int8_t m)
 
 void PutAscii(AsmBlock *this, int8_t m)
 {
+	this->strm.C = fgetc(this->strm.f);
 	while (this->strm.C != '"')
 	{
 		++this->offs;
