@@ -62,7 +62,6 @@ void AddLabl(AsmBlock *this, const uint64_t offs)
 
 void PrsLine(AsmBlock *this)
 {
-	printf("%s\t", this->strm.tk);
 
 	if (*this->strm.tk == '.')
 	{
@@ -72,9 +71,10 @@ void PrsLine(AsmBlock *this)
 	{
 		HandleLabl(this);
 	}
-	else
+	else if (isalpha(*this->strm.tk))
 	{
-		TokStrmNext(&this->strm);
+		printf("%s\t", this->strm.tk);
+		HandleIns(this);
 	}
 }
 

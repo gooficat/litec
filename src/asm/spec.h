@@ -11,6 +11,7 @@ typedef enum : uint8_t
 {
 	ASM_REG_BYTE,
 	ASM_REG_WORD,
+	ASM_REG_SEGM,
 } AsmRegType;
 
 typedef struct
@@ -65,3 +66,6 @@ extern const uint16_t NUM_MNEMS;
 
 extern const AsmOpc OPCODES[];
 extern const uint16_t NUM_OPCODES;
+
+extern const AsmReg REGS[];
+extern const uint8_t NUM_REGS;

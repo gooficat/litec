@@ -6,8 +6,8 @@
 
 typedef struct
 {
-	AsmReg *base;
-	AsmReg *index;
+	const AsmReg *base;
+	const AsmReg *index;
 	uint8_t scale;
 	int8_t disp;
 } AsmMemArg;
@@ -24,7 +24,7 @@ typedef struct
 {
 	AsmArgType type;
 	union {
-		AsmReg *reg;
+		const AsmReg *reg;
 		int64_t imm;
 		AsmMemArg mem;
 	};
@@ -34,4 +34,5 @@ typedef struct
 {
 	char mnem[MNEM_MAX];
 	AsmArg args[ASM_ARG_MAX];
+	uint8_t n_args;
 } AsmIns;

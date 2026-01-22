@@ -40,3 +40,5 @@ void PutBytes(AsmBlock *this, const void *data, size_t n);
 void AddLabl(AsmBlock *this, const uint64_t offs);
 
 AsmLabl *FindLabl(AsmBlock *this);
+
+void HandleIns(AsmBlock *this);
