@@ -18,6 +18,16 @@ void PutAscii(AsmBlock *this, int8_t m)
 		{
 			fputc(this->strm.C, this->out);
 		}
+		this->strm.C = fgetc(this->strm.f);
+	}
+	this->strm.C = fgetc(this->strm.f);
+	if (m)
+	{
+		++this->offs;
+		if (this->pass == ASM_PASS_WRIT)
+		{
+			fputc(0, this->out);
+		}
 	}
 }
 

@@ -1,10 +1,31 @@
 #include "parse.h"
+#include "direc.h"
 #include "token.h"
 #include <ctype.h>
+#include <stdint.h>
+#include <string.h>
+
+void HandleDirec(AsmBlock *this)
+{
+	TokStrmNext(&this->strm);
+
+	for (uint8_t i = 0; i != num_directives; ++i)
+	{
+		if (!strcmp(this->strm.tk, directives[i].mnem))
+		{
+			//
+		}
+	}
+}
 
 void PrsLine(AsmBlock *this)
 {
 	printf("%s\t", this->strm.tk);
+
+	if (*this->strm.tk == '.')
+	{
+		HandleDirec(this);
+	}
 
 	TokStrmNext(&this->strm);
 }
